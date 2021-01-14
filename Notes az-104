@@ -1,0 +1,255 @@
+---------------------------------
+Az-104 Last minutes SUMMARY Notes
+---------------------------------
+
+
+Manage Azure subscriptions and resources
+========================================
+
+Azure offers a rich ecosystem of governance controls with user-level and platform-level controls in the form of role-based access control (RBAC) and Azure Policy.
+
+Azure Management Groups can be used to control policy and RBAC for multiple subscriptions. Management groups enable organizational alignment for your Azure subscriptions through custom hierarchies and groupings.
+
+Tags in Azure can be used to logically organize resources by categories. Each tag is a name and a value pair. Tags can be shared across multiple resources and enforced with Azure Policy.
+
+Azure Policy is a service that lets you create, manage, and apply policy to Azure resources at a subscription, resource group, or resource level. Policies enforce different rules over your Azure resources, so those resources remain compliant with your organization’s standards.
+
+Role-based access control allows you to grant users, groups, and service principals access to Azure resources at the subscription, resource group, or resource scopes with RBAC inheritance. The three core roles are Owner, Contributor, and Reader.
+
+Azure Monitor is a single-pane of glass for accessing Azure metrics, tenant and resource diagnostic logs, Log Analytics, service health, and alerts.
+
+You can configure alerts based on metric alerts (captured from Azure Metrics) to Activity Log alerts that can notify by email, web hook, SMS, Logic Apps, or even an Azure Automation Runbook.
+
+Azure Log Analytics can consolidate machine data from on-premises and cloud-based workloads and this data is indexed and categorized for quick searching. Data can be collected from both Windows and Linux machines.
+
+Azure Log Analytics has many management solutions that help administrators gain value out of complex machine data. These solutions contain pre-built visualizations and queries that help surface insights quickly.
+
+Queries in Log Analytics can be saved for quick access and visualized and shared using Azure Dashboards. To analyze data outside of Log Analytics you can export the data to Excel and Power BI.
+
+You can create resources from the portal, PowerShell, the CLI tools, and Azure Resource Manager templates. You should understand when to use which tool and how to configure the resource during provisioning and after provisioning.
+
+A resource is simply a single service instance in Azure. Most services in Azure can be represented as a resource. For example, a Web App instance is a resource. An App Service Plan is also a resource. Even a SQL Database instance is a resource.
+
+A resource group is a logical grouping of resources. For example, a Resource Group where you deploy a VM compute instance may be composed of a Network Interface Card (NIC), a Virtual Machine, a Virtual Network, and a Public IP Address.
+
+A resource group template is a JSON file that allows you to declaratively describe a set of resources. These resources can then be added to a new or existing resource group. For example, a template can contain the configuration necessary to create two API App instances, a Mobile App instance, and a Document DB instance.
+
+A template can simplify orchestration because you only need to deploy the template to deploy all of your resources.
+
+A template allows you to configure multiple resources simultaneously and use variables/parameters/functions to create dependencies between resources.
+
+
+Implement and manage storage
+============================
+
+Azure storage accounts provide 4 separate services: blobs, tables, queues and files. Understand the usage scenarios of each service.
+
+The Standard performance tier uses magnetic disks and supports all services. The Premium tier uses solid-state disks and is only used for unmanaged VM disks.
+
+Storage accounts must specify a replication mode. Options are locally-redundant, zone-redundant, geo-redundant and read-access geo-redundant storage.
+
+Blob storage supports three types of blobs (block, page and append blobs), and three access tiers (hot, cool, and archive).
+
+There are 3 kinds of storage account: general purpose v1, general purpose v2 and blob storage. The availability of features varies between storage account kinds.
+
+Azure storage can be managed through several tools directly from Microsoft: the Azure portal, PowerShell, CLI, Storage Explorer, and AzCopy. It’s important to know when to use each tool.
+
+Access to storage accounts can be controlled using several techniques. Among them are: storage account name and key, shared access signature (SAS), SAS with access policy, and using the storage firewalland virtual network service endpoints. Access to blob storage can also be controlled using the public access level of the blob container.
+
+You can also use the async blob copy service to copy files between storage accounts or from outside publicly accessible locations to your Azure storage account.
+
+Azure CDN can be used to improve web site performance by caching static data close to the end users. Blob storage can be used as a CDN origin.
+
+Storage accounts and CDN both support custom domains. Enabling SSL is only supported on custom domains when the blob is accessed via CDN.
+
+Enable diagnostics and alerts to monitor the status of your storage accounts.
+
+Data can be imported into Azure storage when on-premises locations have limited or no connectivity using the Azure Import/Export service or Azure Data Box.
+
+Azure Backup can be used to protect files and folders, applications, and IaaS virtual machines. This cloud-based data protection service helps organizations by providing offsite backups of on-premises servers and protection of VM workloads they have already moved to the cloud.
+
+
+Deploy and manage virtual machines (VMs)
+========================================
+
+Each compute family is optimized for either general or specific workloads. You should optimize your VM by choosing the most appropriate size.
+
+You can create VMs from the portal, PowerShell, the CLI tools, and Azure Resource Manager templates. You should understand when to use which tool and how to configure the virtual machine resource during provisioning and after provisioning. For example, availability sets can only be set at provisioning time, but data disks can be added at any time.
+
+You can connect to Azure VMs using a public IP address or a private IP address with RDP, SSH, or even PowerShell. To connect to a VM using a private IP you must also enable connectivity such as site-to-site, point-to-site, or ExpressRoute.
+
+The Custom Script Extension is commonly used to execute scripts on Windows or Linux-based VMs. The PowerShell DSC extension is used to apply desired state configurations to Windows-based VMs.
+
+A common method of troubleshooting virtual machines with RDP/SSH connectivity or unexplained application issues is to redeploy the virtual machine. Redeploy moves the virtual machine to a different Azure node.
+
+VM storage comes in Standard HDD, Standard SSD, Premium SSD, with Ultimate SSD in preview. Understanding which tier to choose for capacity and performance planning is important.
+
+There are unmanaged and managed disks and images. The key difference between the two is with unmanaged disks or images it is up to you to manage the storage account. With managed disks, Azure takes care of this for you, so it greatly simplifies managing images and disks.
+
+The Azure Diagnostics agent can be enabled on Windows and Linux virtual machines to capture diagnostic, performance, logs and boot diagnostic data.
+
+You can configure alerts based on metric alerts (captured from Azure Diagnostics) to Activity Log alerts that can notify by email, voice, web hook, SMS, Logic Apps, or even an Azure Automation Runbook. Azure Availability Zones provide high availability at the data center level. Azure Availability Sets provide high availability within a data center.
+
+Managed disks provide additional availability over unmanaged disks by aligning with availability sets and providing storage in redundant storage units.
+
+Virtual Machine Scale Sets (VMSS), can scale up to 1000 instances. You need to ensure that you create the VMSS configured for large scale sets if you intend to go above 100 instances. There are several other limits to consider too. Using a custom image, you can only create up to 300 instances. To scale above 100 instances, you must use the Standard SKU of the Azure Load Balancer or the Azure App Gateway.
+
+The Azure Backup service can backup and restore and entire virtual machine and you can also use it for just file recovery to restore filesfrom a recovery point without recreating the entire virtual machine.
+
+
+Configure and manage virtual networks
+=====================================
+
+Azure virtual networks (VNets) are isolated networks using a private IP address space.
+
+Virtual networks are divided into subnets, which allow you to isolate workloads.
+
+Azure reserves the first 4 and last IP address in each subnet. The first IP address allocated to VMs is therefore typically the .4 IP address.
+
+Private IP addresses for a VM are assigned from a subnet and configured as settings on the IP configuration of a network interface resource.
+
+A VM can be associated with one or more network interfaces, and each network interface can contain multiple IP configurations.
+
+Private IP addresses support two allocation methods: dynamic or static. Dynamic IP addresses are released when the VM is stopped (deallocated).
+
+Public IP addresses are managed as a standalone resource, which can be associated with a network interface IP configuration.
+
+Public IP addresses support two pricing tiers (SKUs). The Basic tier supports dynamic and static assignment and provides open connectivity (which can be restricted using NSGs). The Standard tier supports zone-redundant deployments, use static allocation only, and is closed by default (access is enabled using NSGs).
+
+User Defined Routes (UDRs) change the default behavior of subnets allowing you to direct outbound traffic to other locations. Typically, traffic is sent through a virtual appliance such as a firewall.
+
+If a UDR is used to send traffic to a virtual appliance, IP forwarding must be enabled on the NIC of the virtual appliance VM.
+
+Routing outbound Internet traffic via a VPN connection to a network security device is known as forced tunneling.
+
+The effective routes for each network interface can be reviewed to help diagnose routing issues.
+
+VNets can be connected using either VNet peering or VNet-to-VNet VPN connections.
+
+To connect two VNet, they must have non-overlapping IP address spaces.
+
+Virtual networks can be connected using VNet peering. This is supported both within a region or across regions.
+
+By default, peered VNets appear and perform as a single network. There is an option to limit connectivity, in which case NSG rules must be used to define the permitted connections.
+
+VNet peering allows VMs to see each other as one network, but their relationships are non-transitive. If VNETA and VNETB are peered and VNETB and VNETC are peered VNETA and VNETC are not peered.
+
+A common approach is to use a hub and spoke network architecture, in which separate spoke VNets are used by each application, peered to a hub VNet containing a network virtual appliance (NVA). The peering connections must enable Allow Forwarded Traffic.
+
+Using VNet peering to provide access to a central VNet containing shared services, such as Active Directory domain controllers, is known as service chaining.
+
+Alternatively, virtual networks can be connected using a VNet-to- VNet VPN connection.
+
+A virtual network gateway can be used to create VPN connections between virtual networks (and is then called a VPN gateway).
+
+The size of the VPN gateway should be chosen based on the throughput required.
+
+The GatewaySubnet is a special subnet that is only used for virtual network gateways.
+
+A VPN gateway can be shared by peered VNets. The peering connections must enable the settings to Use Remote Gateway (on the peering towards the gateway) and Allow Gateway Transit (on the peering from the gateway).
+
+Both global VNet peering and VNet-to-VNet VPN connections route traffic between Azure regions over the Microsoft backbone network, not the public Internet.
+
+Azure DNS provides an authoritative DNS service for hosting Internet-facing domains.
+
+DNS zones in Azure DNS must be delegated from the parent domain. This is achieved by setting up appropriate NS records in the parent domain, pointing to the name servers assigned by Azure DNS.
+
+DNS records in Azure DNS are managed using record sets, which are the collection of records with the same name and the same type.
+
+DNS records at the zone apex use the record name @. You cannot create records with the CNAME record type at the zone apex.
+
+Azure DNS Alias records allow DNS records to reference other Azure resources, such as a public IP address.
+
+DNS zone files are a standard format used to transfer DNS records between DNS systems. DNS zone files can only be imported into or exported from Azure DNS by using the Azure CLI.
+
+Azure-provided DNS, also known as Internal DNS, provides VM-to- VM DNS lookups within a virtual network.
+
+Alternatively, a customer can implement their own DNS servers, which can be configured either at the VNet or the network interface level.
+
+Azure DNS also supports private DNS zones, which can also be used to enable VM-to-VM DNS lookups.
+
+Network security groups are used to create firewall rules to control network flows.
+
+NSGs can be applied at the subnet level, or on individual VM network interfaces.Each NSG includes a list of default rules, which can be overridden using user-defined rules. Rules are applied in priority order (processing stops at the first rule matching the traffic in question).
+
+Source and destination IP address ranges in NSG rules can be specified explicitly using CIDR ranges.
+
+IP address ranges can also be specified using service tags which are platform shortcuts for the IP ranges for key Azure services.
+
+Commonly-used service tags include VirtualNetwork, Internet, AzureCloud, Storage, and SQL.
+
+IP address ranges can also be specified using application security groups (ASGs). ASGs allow NSG rules to be defined for groups of VMs without needing to allocate the VMs into separate subnets.
+
+Tools to help identifying the required NSG rules include service map and NSG flow logs.
+
+Effective security rules can be reviewed for each network interface. This allows you to see the exact IP ranges used by each service tag and ASG.
+
+Azure Load Balancer (ALB) is a fully-managed, high performance load-balancing service for TCP and UDP traffic. It operates at the transport layer (OSI Layer 4). Unlike App Gateway, it does not have visibility into application-level traffic.
+
+ALB can be deployed with either a public (Internet) or private (Intranet) frontend IP address.
+
+ALB comes in two pricing tiers (SKUs): Basic or Standard. The Standard tier supports availability zones, larger and more flexible backend pools, and a number of other features. The Basic tier is free of charge.
+
+An ALB load-balancing configuration comprises frontend IP configuration, backend pool, health probes, and load-balancing rule. ALB also supports port forwarding, using inbound NAT rules. This maps a specific frontend port to a specific backend port on a specific backend server.
+
+Network Performance Monitor provides monitoring for hybrid networks. It supports performance monitor (for monitoring connections between two endpoints), connectivity monitor (to monitor outbound connections to a given IP or FQDN), and ExpressRoute monitor to monitor ExpressRoute connections.
+
+Network Watcher is a central hub providing access to a wide range of networking tools in Azure.
+
+IP Flow Verify is a Network Watcher feature used to test if a given network flow is allowed in or out of an Azure VM. Next Hop is used to determine the next hop address and routing rule for a given network flow.
+
+Packet Captures enables network traffic on a given VM to be captured, either locally or to an Azure storage account. Network Topology creates a diagrammatic representation of the resources in your virtual network.VPN Troubleshoot provides automated, in-depth troubleshooting of VPN connections.
+
+Connection Troubleshoot allows you to test the connectivity between two Azure VMs, or between a VM and an arbitrary external endpoint.
+
+Connection Monitor enables long-term connection monitoring, using similar diagnostics as used by Connection Troubleshoot.
+
+Site-to-Site VPN connections provide connectivity between an on- premises network and an Azure virtual network, using an encrypted tunnel over the public Internet.
+
+VPN gateways are virtual network gateways deployed with gateway type VPN. They are used to terminate site-to-site VPN connections. Site-to-Site VPNs support BGP routing and active-active gateways and connections to enable high availability.
+
+A wide variety of physical (and software) devices are supported as the on-premises Site-to-Site VPN endpoint. The device must have an Internet-facing static IPv4 address.
+
+A local network connection is an Azure resource used to represent the on-premises VPN device and network in Azure.
+
+An ExpressRoute connection provides connectivity between an on- premises network an Azure virtual network, using a dedicated connection from a connectivity provider.
+
+You can connect to ExpressRoute either via your co-location facility provider, via a point-to-point ethernet connection, or by extending your IPVPN WAN.
+
+ExpressRoute provides Microsoft Peering (connectivity to Azure PaaS endpoints, and other Microsoft services) or Private Peering (connectivity to Azure virtual networks). The former uses Internet address and the latter uses Intranet addresses. Azure Public Peering, for Azure PaaS services only, is deprecated for new ExpressRoute circuits.
+
+ExpressRoute circuits provide different levels of bandwidth, from 50Mbps to 10Gbps. They also provide redundant connections. ExpressRoute circuits are connected to an Azure virtual network using an ExpressRoute gateway (a virtual network gateway of type ExpressRoute).
+
+By default, ExpressRoute provides connectivity to all Microsoft datacenters in a given geopolitical region. The ExpressRoute Premium Add-On extends coverage to all datacenters, globally. It also increases the number of private peering routes and the number of virtual networks, which can be connected to a circuit.
+
+
+Manage identities
+=================
+
+Custom domains can be added to Azure AD, such as contoso.com, but there is always a default onmicrosoft.com domain.
+
+Azure AD Identity Protection enables administrators to configuration Azure AD tenant-wide policies for multi-factor authentication, sign-in risk, and user risk.
+
+Windows 10 can be added to Azure AD as a device to be managed, enabling BYOD or corporate cloud only deployments with Azure AD Join.
+
+Azure AD Join enables administrators to manage device identity independently of users. For example, dynamic security groups can be created based on device attributes and then conditional access policies could be applied to those groups.
+
+Downstream Windows clients can be managed through Azure AD using Azure AD hybrid join.
+
+Enterprise State Roaming allows Windows 10 clients to synchronize settings and application data securely across multiple corporate devices.
+
+Conditional access is a feature of Azure AD which allows administrators to control access to cloud applications through additional checks such as user location, the device the user is accessing the cloud app from, and more.
+
+Multiple Azure AD tenants can be created and managed through Azure. This includes creating new directories and deleting existing directories.
+
+Users and groups can be created through the Azure Portal, Azure PowerShell, the Azure CLI, and the Graph API.
+
+Users and groups can be managed in bulk with tools like PowerShell.
+
+Azure AD supports hybrid identity scenarios with Azure AD Connect.
+
+Azure AD supports federated logins and single-sign on. When federated identity is not required, Azure AD also single sign-on with both password hash synchronization and pass-through authentication.
+
+Self-service password reset can be combined with the password writeback features of Azure AD Connect to allow users to reset their passwords from the cloud while adhering to on-premises password standards.
+
+Many advanced features of Azure AD require Azure AD Premium P1 or Azure AD Premium P2 licenses. When considering Azure ADfeatures, administrators need to be aware of the licensing boundaries.
